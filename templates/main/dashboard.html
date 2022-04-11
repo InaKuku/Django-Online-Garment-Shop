@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+
+
+{% block page_content %}
+    {% if garments_photos %}
+        <h1 class='text-center'>Photos of our clients:</h1>
+        <div class="container mb-5">
+            <div class="row mb-5">
+
+                <!-- First Card with Info for the Garment -->
+                {% for garment_photo in garments_photos %}
+                <div class="card ml-3 mb-3" style="width: 18rem;">
+                    <!-- Image -->
+                    <img src="{{ garment_photo.photo.url }}"
+                         class="card-img-top" alt="Photo description">
+                    <div class="card-body">
+                        {% for own_garment in garment_photo.tagged_garments.all %}
+                            <h5 class="card-title">{{ own_garment.own_name }}</h5>
+                        {% endfor %}
+                        <a href="{% url 'garment photo details' garment_photo.id %}" class="btn btn-primary">See details</a>
+                    </div>
+                </div>
+            {% endfor %}
+                <!-- End First Card -->
+
+
+
+            </div>
+        </div>
+
+    {% else %}
+        <h1 class='text-center'>No garment photos yet</h1>
+        <div class=" row d-flex justify-content-center align-content-center">
+            <!-- Button to Add a new Photo -->
+            <a href="{% url 'create garment photo' %}" class="btn btn-lg btn-secondary row align-self-baseline">Add Photo</a>
+        </div>
+    {% endif %}
+
+
+
+{% endblock %}

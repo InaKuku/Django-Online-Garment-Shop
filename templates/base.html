@@ -1,0 +1,95 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Sunny - clothes with character </title>
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="icon" type="image/png" href="https://pluspng.com/img-png/instagram-png-instagram-png-icon-1024.png">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+          integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+    <link rel="stylesheet" href="{% static "css/styles.css" %}">
+</head>
+
+<body>
+
+<!-- Navigation Bar -->
+<nav class="navbar sticky-top navbar-expand-lg navbar-light bg-light" style="margin-bottom:2%">
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
+            aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNavDropdown">
+        <a class="navbar-brand" href="{% url 'index' %}">Sunny shop</a>
+        <ul class="navbar-nav">
+            <li class="nav-item" >
+                <a class="nav-link" href="{% url 'index' %}">Home</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'shop' %}">Shop</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'dashboard' %}">Album</a>
+            </li>
+
+        </ul>
+{#    </div>#}
+{#    <div class="collapse navbar-collapse" id="navbarNavDropdown">#}
+{#        <ul class="navbar-nav ml-auto">#}
+{#            <li class="nav-item">#}
+{#                <form class="form-inline my-2 my-lg-0">#}
+{#                    <input class="form-control mr-sm-2" type="search" placeholder="Search in Sunny shop" aria-label="Search">#}
+{#                    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>#}
+{#                </form>#}
+{#            </li>#}
+{#        </ul>#}
+{#    </div>#}
+
+{#    <div class="collapse navbar-collapse" id="navbarNavDropdown">#}
+        <ul class="navbar-nav ml-auto">
+
+
+            {#                {% if not hide_additional_nav_items %}#}
+            {% if request.user.is_authenticated %}
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'create garment photo' %}">Add Photo</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'profile details' request.user.id %}">Profile</a>
+                </li>
+                <li>
+                    <a class="nav-link" href="{% url 'logout form' %}">Logout</a>
+                </li>
+            {% else %}
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'login user' %}">Login</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'create profile' %}">Register</a>
+                </li>
+            {% endif %}
+        </ul>
+    </div>
+</nav>
+<!-- End Navigation Bar -->
+<div class="container">
+    {% block page_content %}
+    {% endblock %}
+</div>
+
+
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js"
+        integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4"
+        crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js"
+        integrity="sha384-h0AbiXch4ZDo7tp9hKZ4TsHbi047NrKGLO3SEJAg45jXxnGIfYzk4Si90RDIqNm1"
+        crossorigin="anonymous"></script>
+</body>
+</html>

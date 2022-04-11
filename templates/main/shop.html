@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+
+
+{% block page_content %}
+
+    {% if garments %}
+        <h1 class='text-center'>Clothes with character!</h1>
+        <div class="container mb-5">
+            <div class="row mb-5">
+
+                <!-- First Card with Info for the Garment -->
+                {% for garment in garments %}
+                    <div class="card ml-3 mb-3" style="width: 18rem;">
+                        <!-- Image -->
+                        <img src="{{ garment.image.url }}"
+                             class="card-img-top" alt="{{ garment.name }}n">
+                        <div class="card-body">
+                            <!-- Info for each pet on the photo -->
+                            {#                        {% for pet in garment.tagged_garments.all %}#}
+                            {#                            <h5 class="card-title">{{ pet.name }} {% if pet.date_of_birth %}#}
+                            {#                                {{ pet.age }}#}
+                            {#                            {% endif %}</h5>#}
+                            {#                        {% endfor %}#}
+                            <!-- First 30 chars from the description -->
+                            <p class="card-text">{{ garment.name }}</p>
+                            <!-- Button to the Photo Details Page -->
+                            <a href="{% url 'garment details' garment.id %}" class="btn btn-success">See details</a>
+                        </div>
+                    </div>
+                {% endfor %}
+                <!-- End First Card -->
+
+
+            </div>
+        </div>
+    {% else %}
+        <h1 class='text-center'>No garments yet</h1>
+    {% endif %}
+
+
+
+{% endblock %}

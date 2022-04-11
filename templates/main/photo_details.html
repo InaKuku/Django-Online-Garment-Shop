@@ -1,0 +1,95 @@
+{% extends 'base.html' %}
+
+
+{% block page_content %}
+    <div class="d-flex">
+        <div class="d-inline p-2 w-50">
+            <!-- Image -->
+            <img src="{{ garment_photo.photo.url }}"
+                 class="w-100 rounded mx-auto d-block" alt="{{ garment_photo.description }}">
+        </div>
+        <div class="d-inline p-2 w-50">
+            {% if garment_photo.tagged_garments.all %}
+                {% for owned_garment in garment_photo.tagged_garments.all %}
+                    <p><u>Size:</u> {{ owned_garment.size }}</p>
+                    <p><u> Garment:</u> <a
+                            href="{% url 'garment details' owned_garment.garment.pk %}">{{ owned_garment.garment.name }}</a>
+                    </p>
+                    <p><u>My thoughts about it:</u> {{ owned_garment.own_name }}</p>
+                {% endfor %}
+            {% else %}
+                <div>
+                    <h3>There are no tagged clothes </h3>
+                </div>
+            {% endif %}
+            <p><u>User:</u> {{ garment_photo.user.profile.first_name }}</p>
+            <p><u>Publicated:</u> {{ garment_photo.publication_date }}</p>
+
+
+
+            {% if not is_owner %}
+                <a href="{% url 'like garment photo' garment_photo.id %}"><i class="fa fa-heart-o"
+                                                                             aria-hidden="true"></i></a>
+            {% endif %}
+            <!-- Likes Counter -->
+            <p class="mt-2">Likes: {{ garment_photo.likes }}</p>
+            <!-- Buttons -->
+            {#            <a href="#" class="btn btn-primary">Edit</a>#}
+            {#            <a href="#" class="btn btn-danger">Delete</a>#}
+
+
+            {% if is_owner %}
+                <a href="{% url 'edit garment photo' garment_photo.pk %}" class="btn btn-primary">Edit</a>
+                <a href="{% url 'delete garment photo' garment_photo.pk %}" class="btn btn-danger">Delete</a>
+            {% endif %}
+        </div>
+{#        <div>#}
+{#        {{ viewed_garment_photos }}#}
+{#        {% if last_viewed_garment_photos|length > 1 %}#}
+{#        <h5><u>Last viewed:</u> </h5>#}
+{#        <div class="container mb-5">#}
+{#        <div class="row mb-5">#}
+{#            {% for garment_photo in last_viewed_garment_photos %}#}
+{#                <div class="card ml-3 mb-3" style="width: 18rem;">#}
+{#                    <img src="{{ garment_photo.photo.url }}"#}
+{#                         class="card-img-top" alt="Photo description">#}
+{#                    <div class="card-body">#}
+{#                        <a href="{% url 'garment photo details' garment_photo.id %}" class="btn btn-primary">See#}
+{#                            details</a>#}
+{#                    </div>#}
+{#                </div>#}
+{#            {% endfor %}#}
+{#        </div>#}
+{##}
+{#    </div>#}
+{#        {% endif %}#}
+{#        </div>#}
+{#    {% if user.profile.permission == True %}#}
+{#        <div>#}
+{#        {% if other_photos|length > 1 %}#}
+{#        <h5><u>All photos by this user:</u> </h5>#}
+{#        <div class="container mb-5">#}
+{#        <div class="row mb-5">#}
+{#            {% for garment_photo in all_photos %}#}
+{#                <div class="card ml-3 mb-3" style="width: 18rem;">#}
+{##}
+{##}
+{#                    <img src="{{ garment_photo.photo.url }}"#}
+{#                         class="card-img-top" alt="Photo description">#}
+{#                    <div class="card-body">#}
+{#                        {% for own_garment in garment_photo.tagged_garments.all %}#}
+{#                            <h5 class="card-title">{{ own_garment.own_name }}</h5>#}
+{#                        {% endfor %}#}
+{#                        <a href="{% url 'garment photo details' garment_photo.id %}" class="btn btn-primary">See#}
+{#                            details</a>#}
+{#                    </div>#}
+{#                </div>#}
+{#            {% endfor %}#}
+{#        </div>#}
+{##}
+{#    </div>#}
+{#            {% endif %}#}
+{#        </div>#}
+{#    {% endif %}#}
+    </div>
+{% endblock %}

@@ -1,0 +1,9 @@
+{% extends 'base.html' %}
+
+
+{% block page_content %}
+    <div class="alert alert-success" role="alert">
+        401 Unauthorized. You should create a profile to open this page! <a
+            href="{% url 'create profile' %}" class="alert-link">Create a profile.</a>.
+    </div>
+{% endblock %}

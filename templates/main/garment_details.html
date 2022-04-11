@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+
+
+{% block page_content %}
+    <div class="d-flex">
+        <div class="d-inline p-2 w-50">
+            <!-- Image -->
+            <img src="{{ garment.image.url }}"
+                 class="w-50 rounded mx-auto d-block img-fluid" alt="{{ garment.name }}">
+        </div>
+        <div class="d-inline p-2 w-50">
+            <h2>{{ garment.name }}</h2>
+            <p>Type: {{ garment.type }}</p>
+            <p>Made of: {{ garment.materials }}</p>
+            <p>{{ garment.description }}</p>
+            <form method="POST" action="{% url 'garment details' garment.pk %}">
+                {% csrf_token %}
+                {{ owned_garment_form }}
+                <p></p>
+                <p>
+                    <button class="btn btn-success" type="submit">Order</button>
+                </p>
+            </form>
+        </div>
+        <div>
+
+        </div>
+            <!-- Likes Button -->
+
+{#            <!-- Likes Counter -->#}
+{#            <p class="mt-2">Likes: {{ garment_photo.likes }}</p>#}
+            <!-- Buttons -->
+{#            <a href="#" class="btn btn-primary">Edit</a>#}
+{#            <a href="#" class="btn btn-danger">Delete</a>#}
+{#            {% if is_owner %}#}
+{#                <a href="{% url 'edit pet photo' garment_photo.pk %}" class="btn btn-primary">Edit</a>#}
+{#                <a href="{% url 'delete pet photo' garment_photo.pk %}" class="btn btn-danger">Delete</a>#}
+{#            {% endif %}#}
+
+    </div>
+{% endblock %}

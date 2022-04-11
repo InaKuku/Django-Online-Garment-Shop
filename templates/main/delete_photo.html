@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+
+
+{% block page_content %}
+<div class="alert alert-danger" role="alert"> You are about to delete a photo? Are you sure?
+    <form action="" method="post">
+        {% csrf_token %}
+        <input type="submit" class="alert-link" value="Sure"/>
+        {#        <a href="#" class="alert-link">an example link</a>#}
+    </form>
+</div>
+
+{% endblock %}

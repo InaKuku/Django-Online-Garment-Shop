@@ -1,0 +1,9 @@
+{% extends 'base.html' %}
+
+
+{% block page_content %}
+    <div class="alert alert-success" role="alert">
+        It seems that you are not allowed to see this page or this page doesn`t exist anymore. Let`s go <a
+            href="{% url 'index' %}" class="alert-link">home</a>.
+    </div>
+{% endblock %}

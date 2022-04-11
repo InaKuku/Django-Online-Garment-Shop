@@ -1,0 +1,81 @@
+{% extends 'base.html' %}
+
+
+{% block page_content %}
+    {% if is_owner %}
+    <div class="row justify-content-center">
+        <div class="d-flex">
+            <div class="d-inline p-2 w-50">
+                <div class="d-flex flex-column">
+                    <h5><u>Name:</u> {{ profile.first_name }} {{ profile.last_name }}</h5>
+                    <h5><u>May other users see your collection of photos:</u> {{ profile.permission }}</h5>
+
+                </div>
+                <p class="mt-2">Total Likes: {{ total_likes_count }}</p>
+                <p class="mt-2">Total Images: {{ total_garment_photos_count }}</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-8 text-center">
+        <a href="{% url 'edit profile' profile.pk %}" class="btn btn-primary">Edit</a>
+        <a href="{% url 'delete profile' profile.pk %}" class="btn btn-danger">Delete</a>
+    </div>
+    <div class="container mb-5">
+        <div class="row mb-5">
+            {% for garment_photo in garment_photos %}
+                <div class="card ml-3 mb-3" style="width: 18rem;">
+
+
+                    <img src="{{ garment_photo.photo.url }}"
+                         class="card-img-top" alt="Photo description">
+                    <div class="card-body">
+                        {% for own_garment in garment_photo.tagged_garments.all %}
+                            <h5 class="card-title">{{ own_garment.own_name }}</h5>
+                        {% endfor %}
+                        <a href="{% url 'garment photo details' garment_photo.id %}" class="btn btn-primary">See
+                            details</a>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+        {% else %}
+        <div class="alert alert-danger" role="alert">
+        <h2> You don`t have permission to see this content</h2>
+        </div>
+    {% endif %}
+
+
+
+
+                {#                {% if is_owner %}#}
+                {#                    <a href="{% url 'edit profile' %}" class="btn btn-primary">Edit</a>#}
+                {#                    <a href="{% url 'delete profile' %}" class="btn btn-danger">Delete</a>#}
+                {#                {% endif %}#}
+{#            </div>#}
+{#        </div>#}
+{#    </div>#}
+
+<!-- End Profile Information -->
+
+<!-- Pets Information -->
+{#<h2 class="text-center">My Pets</h2>#}
+{#<div class="container mb-4">#}
+{#    <div class="d-flex justify-content-start mb-5">#}
+{#    {% for pet in pets %}#}
+{#        <!-- Info for First Pet -->#}
+{#        <div style="width: 18rem;">#}
+{#            <h5>{{ pet.name }}</h5>#}
+{#            {% if pet.date_of_birth %}#}
+{#                <p class="mt-2">Age: {{ pet.age }}</p>#}
+{#            {% endif %}#}
+{#        {% if is_owner %}#}
+{#            <a href="{% url 'edit pet' pet.pk %}" class="btn btn-primary">Edit</a>#}
+{#            <a href="{% url 'delete pet' pet.pk %}" class="btn btn-danger">Delete</a>#}
+{#        {% endif %}#}
+{#        </div>#}
+{#     {% endfor %}#}
+{#    </div>#}
+{#</div>#}
+
+{% endblock %}

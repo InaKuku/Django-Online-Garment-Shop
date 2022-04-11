@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+
+{% block page_content %}
+    <h1 class="text-center">Edit Your Profile</h1>
+    <div class="row">
+        <div class="col-lg-3"></div>
+        <div class="col-lg-6">
+            <form method="POST" action="{% url 'edit profile' profile.pk %}">
+                {% csrf_token %}
+
+               {{ form}}
+
+                <button class="btn btn-primary mt-2" type="submit">Edit</button>
+            </form>
+            Do you want to change your password? Follow this link: <a href="{% url 'change password' %}"> reset your password</a>
+        </div>
+        <div class="col-lg-3"></div>
+    </div>
+    <p></p>
+    <p></p>
+    <p></p>
+{% endblock %}

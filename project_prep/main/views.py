@@ -79,24 +79,6 @@ def like_garment_photo(request, pk):
     return redirect('garment photo details', pk)
 
 
-# class CreateGarmentView(views.CreateView):
-#     template_name = 'main/garment_create.html'
-#     form_class = CreateGarmentForm
-#     success_url = reverse_lazy('dashboard')
-#
-#     def get_form_kwargs(self):
-#         kwargs = super().get_form_kwargs()
-#         kwargs['user'] = self.request.user
-#         return kwargs
-#
-# class EditGarmentView(views.UpdateView):
-#     template_name = 'main/pet_edit.html'
-#     form_class = EditGarmentForm
-#
-# class DeleteGarmentView(views.DeleteView):
-#     template_name = 'main/pet_delete.html'
-#     form_class = DeleteGarmentForm
-
 
 
 def CreateMyGarmentPhoto(request):

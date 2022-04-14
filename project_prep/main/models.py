@@ -2,6 +2,7 @@ from django.contrib.auth import get_user_model
 from django.db import models
 from project_prep.accounts.models import AppUser
 from project_prep.common.validators import MaxFileSizeInMbValidator
+from cloudinary import models as cloudinary_models
 
 UserModel = get_user_model()
 
@@ -47,7 +48,8 @@ class Garment(models.Model):
         blank=True,
     )
 
-    image = models.ImageField()
+    # image = models.ImageField()
+    image = cloudinary_models.CloudinaryField('image')
 
     def __str__(self):
         return f'{self.name} - {self.type}'
@@ -92,11 +94,12 @@ class OwnedGarment(models.Model):
 
 class GarmentPhoto(models.Model):
 
-    photo = models.ImageField(
-        validators=(
-            MaxFileSizeInMbValidator(5),
-        )
-    )
+    photo = cloudinary_models.CloudinaryField('image')
+    #         (
+    #     validators=(
+    #         MaxFileSizeInMbValidator(5),
+    #     )
+    # )
 
 
 

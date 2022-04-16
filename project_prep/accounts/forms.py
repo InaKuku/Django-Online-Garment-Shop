@@ -1,6 +1,8 @@
 from django.contrib.auth import get_user_model
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
+from django.core.exceptions import ValidationError
+
 from project_prep.accounts.models import Profile
 from project_prep.common.view_mixins import BootstrapFormMixin
 from django import forms
@@ -18,32 +20,43 @@ class CreateProfileForm(BootstrapFormMixin, UserCreationForm):
         max_length=Profile.LAST_NAME_MAX_LENGTH,
     )
 
-    permission = forms.BooleanField(
-        initial=True,
-        required=False,
-        label="Do you want your collection of photos to be visible to the other Sunny shop users?"
-    )
 
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self._init_bootstrap_form_controls()
 
+
+    def clean(self):
+        cleaned_data = super().clean()
+        f_name = cleaned_data.get('first_name')
+        l_name = cleaned_data.get('last_name')
+
+        for ch in f_name:
+            if not ch.isalpha():
+                raise ValidationError('First name must contain only letters')
+        for ch in l_name:
+            if not ch.isalpha():
+                raise ValidationError('Last name must contain only letters')
+
+
     def save(self, commit=True):
         user = super().save(commit=commit)
         profile = Profile(
             first_name=self.cleaned_data['first_name'],
             last_name=self.cleaned_data['last_name'],
-            permission=self.cleaned_data['permission'],
             user=user,
         )
         if commit:
             profile.save()
         return user
 
+
+
+
     class Meta:
         model = UserModel
-        fields = ('email', 'first_name', 'last_name', 'permission', 'password1', 'password2',)
+        fields = ('email', 'first_name', 'last_name', 'password1', 'password2',)
 
 
 
@@ -51,7 +64,7 @@ class EditProfileForm(forms.ModelForm):
 
     class Meta:
         model = Profile
-        fields = ('first_name', 'last_name', 'permission',)
+        fields = ('first_name', 'last_name', )
 
 
 class DeleteProfileForm(forms.ModelForm):

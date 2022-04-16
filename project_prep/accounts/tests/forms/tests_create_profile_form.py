@@ -21,7 +21,6 @@ class FillInProfileFormTests(TestCase):
             VALID_PROFILE_DATA = {
                 'first_name': 'Test',
                 'last_name': 'Testov',
-                'permission': 'True',
                 'user': self.user,
             }
             profile = Profile(**VALID_PROFILE_DATA)

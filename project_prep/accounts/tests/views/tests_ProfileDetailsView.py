@@ -12,7 +12,7 @@ UserModel = get_user_model()
 class ProfileDetailsViewTests(TestCase):
 
     VALID_USER_CREDENTIALS = {'email': 'test_testov@abv.bg', 'password': '12345qwe'}
-    VALID_PROFILE_DATA = {'first_name': 'Test', 'last_name': 'Testov', 'permission': 'True',}
+    VALID_PROFILE_DATA = {'first_name': 'Test', 'last_name': 'Testov',}
     VALID_GARMENT_DATA = {'name': 'White Dress', 'number': '12837264', 'type': Garment.DRESS, 'materials': Garment.LINEN, 'description': '', 'image': 'some.png'}
     VALID_OWNEDGARMENT_DATA = {'own_name': 'My fav white dress', 'size': OwnedGarment.S}
     VALID_GARMENT_PHOTO = {'photo': 'some_other.png', 'description': '', 'publication_date': date.today(),}

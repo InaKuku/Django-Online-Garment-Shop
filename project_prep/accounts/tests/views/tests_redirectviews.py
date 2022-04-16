@@ -10,7 +10,7 @@ UserModel = get_user_model()
 class ProfileDetailsViewTests(TestCase):
 
     VALID_USER_CREDENTIALS = {'email': 'test_testov@abv.bg', 'password': '12345qwe'}
-    VALID_PROFILE_DATA = {'first_name': 'Test', 'last_name': 'Testov', 'permission': 'True',}
+    VALID_PROFILE_DATA = {'first_name': 'Test', 'last_name': 'Testov',}
 
 
     def __create_valid_user_and_profile(self):

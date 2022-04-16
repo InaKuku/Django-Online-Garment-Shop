@@ -54,10 +54,6 @@ class Profile(models.Model):
         )
     )
 
-    permission = models.BooleanField(
-        null=True,
-        blank=True
-    )
 
     user = models.OneToOneField(
         AppUser,

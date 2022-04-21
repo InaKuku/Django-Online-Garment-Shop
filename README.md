@@ -2,4 +2,6 @@ This is end of Django module project. It represents an online shop. After 'buyin
 the user can upload a photo and tag the garments bought (he/she can choose among all the garments, owned by the user). 
 Only the user can see their profile. Only registered users can see garments and photos details. 
 
+The app is mobile responsive.
+
 The project is available at https://sunny-shop-garments.herokuapp.com/
